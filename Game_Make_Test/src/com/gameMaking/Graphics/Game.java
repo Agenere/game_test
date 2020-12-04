@@ -1,5 +1,6 @@
 package com.gameMaking.Graphics;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import com.gameMaking.Controls.InputControl;
+import com.gameMaking.Models.CBullet;
 import com.gameMaking.Models.Player;
 import com.gameMaking.System.Image_Loader;
 
@@ -27,15 +29,22 @@ public class Game extends BasicGame{
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
+		
 		Image_Loader.getInstance().LoadGameResource();
 		
 		input = new InputControl(gc);
-		p = new Player(50,50);
+		p = new Player(100,100);
 	}
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		g.drawString("Press UP,DOWN,LEFT,RIGHT", 10, 100);
+		//g.drawString("Press UP,DOWN,LEFT,RIGHT", 10, 100);
+		
+		List<CBullet> bullets = p.getBullets();
+		for(int i=0;i<bullets.size();i++) {
+			CBullet temp = bullets.get(i);
+			temp.getImage().draw(temp.getX(), temp.getY());
+		}
 		
 		if(p.getState() == 2)
 			p.getCurrentAnimation().getCurrentFrame().getFlippedCopy(true, false).draw(p.getX(),p.getY());
@@ -49,6 +58,19 @@ public class Game extends BasicGame{
 		p.move(input.getMessage());
 		
 		if(p.getState()==2) p.getCurrentAnimation().update(delta);
+		
+		List<CBullet> bullets = p.getBullets(); //ÃÑ¾Ë»óÀÚ
+		
+		for(int i = 0; i< bullets.size();i++) {
+			CBullet temp = bullets.get(i);
+			
+			if(temp.outOfrange()) {
+				bullets.remove(i);
+				continue;
+			}
+			
+			temp.move();
+		}
 	}
 	
 	public static void main(String[] args) {

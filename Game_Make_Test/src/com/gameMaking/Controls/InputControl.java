@@ -9,14 +9,15 @@ import org.newdawn.slick.command.InputProviderListener;
 import org.newdawn.slick.command.KeyControl;
 
 public class InputControl implements InputProviderListener {
-
-	private InputProvider provider;
-
+	
 	private boolean[] keys = new boolean[16];
 	private Command[] commands = new Command[16];
+	
+	private InputProvider provider;
 
-	private enum KEY_TYPE {Forward,Down,Left,Right}
-	private int[] KEY_VALUE = {Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT};
+	private enum KEY_TYPE {Forward,Down,Left,Right,X}
+	
+	private int[] KEY_VALUE = {Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,Input.KEY_X};
 
 	public InputControl(GameContainer gc) {
 
@@ -48,6 +49,11 @@ public class InputControl implements InputProviderListener {
 		case "[Command=Right]":
 			keys[3] = true;
 			break;
+		case "[Command=X]":
+			keys[4] = true;
+			break;
+		default:
+			break;
 		}
 
 	}
@@ -67,6 +73,11 @@ public class InputControl implements InputProviderListener {
 		case "[Command=Right]":
 			keys[3] = false;
 			break;
+		case "[Command=X]":
+			keys[4] = false;
+			break;
+		default:
+			break;	
 		}
 
 	}

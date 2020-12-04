@@ -1,5 +1,8 @@
 package com.gameMaking.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import com.gameMaking.Graphics.Game;
@@ -11,6 +14,10 @@ public class Player extends GameObject{
 	
 	private Animation idle;
 	private Animation move;
+	
+	private List<CBullet> bullets = new ArrayList<CBullet>(); //총알담아둘 큰 상자
+	
+	private long prevTime = 0; // 공격딜레이
 	
 	public Player(float x, float y) throws SlickException {
 		super(x, y);		
@@ -25,7 +32,7 @@ public class Player extends GameObject{
 		move.setLooping(false);
 	}
 	
-	public void move(boolean[] keys) {
+	public void move(boolean[] keys) throws SlickException {
 		
 		outOfrange();
 		
@@ -51,10 +58,25 @@ public class Player extends GameObject{
 			move.restart();
 			state = 0;
 		}
+		
+		if(keys[4]) {
+			fire();
+		}
 			
 
 	}
 	
+	private void fire() throws SlickException{
+		long curTime = System.currentTimeMillis() - prevTime; // 쿨타임 계산
+		
+		if(curTime > 100) {
+			bullets.add(new CBullet(this.getX()+8, this.getY(), 2f, 0f, 0.01f, 0f));
+			prevTime = System.currentTimeMillis(); //쿨타임 리셋
+		}
+		
+	}
+
+
 	public void outOfrange() {
 		if (this.getX() < 0) this.setX(0);
 		if (this.getX()+idle.getWidth()>Game.Screen_Width)
@@ -76,4 +98,7 @@ public class Player extends GameObject{
 			return idle;
 	}
 
+	public List<CBullet> getBullets() {
+		return bullets;
+	}
 }
