@@ -16,17 +16,23 @@ public class Bullet extends GameObject{
 	}
 	
 	public Bullet(float x, float y, float speed, float angle) throws SlickException{
-		super(x, y,speed);
+		super(x, y);
+		this.speed = speed;
 		this.angle = angle;
 	}
 	
 	public Bullet(float x, float y, float speed, float angle, float speedRate) throws SlickException{
-		super(x, y,speed,angle);
+		super(x, y);
+		this.speed = speed;
+		this.angle = angle;
 		this.speedRate = speedRate;
 	}
 	
 	public Bullet(float x, float y, float speed, float angle, float speedRate, float angleRate) throws SlickException{
-		super(x, y,speed,angle,speedRate);
+		super(x, y);
+		this.speed = speed;
+		this.angle = angle;
+		this.speedRate = speedRate;
 		this.angleRate = angleRate;
 	}
 

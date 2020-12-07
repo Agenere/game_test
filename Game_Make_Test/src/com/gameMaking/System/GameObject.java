@@ -11,16 +11,22 @@ public class GameObject {
 		loader = Image_Loader.getInstance();
 	}
 
-	public GameObject(float x2, float y2, float speed) {
-		// TODO Auto-generated constructor stub
+	public GameObject(float x, float y, float speed) {
+		this.x = x;
+		this.y = y;
+		loader = Image_Loader.getInstance();
 	}
 
-	public GameObject(float x2, float y2, float speed, float angle) {
-		// TODO Auto-generated constructor stub
+	public GameObject(float x, float y, float speed, float angle) {
+		this.x = x;
+		this.y = y;
+		loader = Image_Loader.getInstance();
 	}
 
-	public GameObject(float x2, float y2, float speed, float angle, float speedRate) {
-		// TODO Auto-generated constructor stub
+	public GameObject(float x, float y, float speed, float angle, float speedRate) {
+		this.x = x;
+		this.y = y;
+		loader = Image_Loader.getInstance();
 	}
 
 	public void setX(float x) {

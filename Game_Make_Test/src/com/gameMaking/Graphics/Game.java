@@ -33,7 +33,7 @@ public class Game extends BasicGame{
 		Image_Loader.getInstance().LoadGameResource();
 		
 		input = new InputControl(gc);
-		p = new Player(100,100);
+		p = new Player(300,750);
 	}
 	
 	@Override

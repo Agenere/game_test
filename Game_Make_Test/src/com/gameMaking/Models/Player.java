@@ -66,12 +66,14 @@ public class Player extends GameObject{
 
 	}
 	
-	private void fire() throws SlickException{
+	public void fire() throws SlickException{
+		
 		long curTime = System.currentTimeMillis() - prevTime; // 쿨타임 계산
 		
 		if(curTime > 100) {
 			bullets.add(new CBullet(this.getX()+8, this.getY(), 2f, 0f, 0.01f, 0f));
 			prevTime = System.currentTimeMillis(); //쿨타임 리셋
+			
 		}
 		
 	}
